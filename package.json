@@ -1,0 +1,26 @@
+{
+  "name": "smartbrain-server",
+  "version": "1.0.0",
+  "description": "server for smartbarin project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhdareeb/smartbrain-server.git"
+  },
+  "author": "Mohammad Areeb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhdareeb/smartbrain-server/issues"
+  },
+  "homepage": "https://github.com/mhdareeb/smartbrain-server#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
