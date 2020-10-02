@@ -33,11 +33,11 @@ let database = {
 
 const app = express();
 
-function createNewUser(name, email, password){
+function createNewUser(name, email){
     const lastID = database.users[database.users.length-1].id;
     const newID = Number(lastID)+1;
     const newUser = {
-        id : newID,
+        id : String(newID),
         name : name,
         email : email,
         entries : 0,
@@ -86,13 +86,43 @@ app.post('/signin',(req, res)=>{
 
 app.post('/register',(req, res)=>{
     const {name, email, password} = req.body;
-    const newUser = createNewUser(name, email, password);
+    const newUser = createNewUser(name, email);
     database.users.push(newUser);
     bcrypt.hash(password, null, null, (err, hash) => {
         const newHash = {id:newUser.id, hash : hash};
         database.passwords.push(newHash);
     })
     res.send(database.users[database.users.length-1]);
+})
+
+app.get('/profile/:id', (req,res) => {
+    const {id} = req.params;
+    let found=false, i;
+    for(i=0;i<database.users.length;i++)
+    {
+        if(database.users[i].id===id)
+        {    
+            found=true;
+            break;
+        }
+    }
+    if(found)
+        res.send(database.users[i]);
+    else
+        res.status(400).send('not a valid user');
+})
+
+app.put('/image', (req,res) => {
+    let {id} = req.body;
+    for(let user of database.users)
+    {
+        if(user.id===id)
+        {
+            user.entries++;
+            break;
+        }
+    }
+    res.send("added new image");
 })
 
 app.listen(3000);
