@@ -4,7 +4,8 @@
   "description": "server for smartbarin project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "start:dev" : "nodemon server.js"
   },
   "repository": {
     "type": "git",
