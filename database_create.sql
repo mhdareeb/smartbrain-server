@@ -1,0 +1,2 @@
+CREATE TABLE login(id serial primary key, email varchar(100) unique not null, hash varchar(100) not null);
+CREATE TABLE users(id serial primary key, name varchar(100) not null, email varchar(100) unique not null, entries integer not null default 0, joined timestamp not null default current_timestamp);
