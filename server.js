@@ -24,8 +24,8 @@ console.log('Server Port:', process.env.PORT);
 console.log('Environment:', process.env.NODE_ENV);
 
 const app = express();
-app.use(express.json())
 app.use(cors());
+app.use(express.json())
 
 app.get('/',(req,res) => {base.getUsers(req, res, db)});
 app.post('/signin',(req, res) => {signin.handleSignin(req, res, db, bcrypt)});
