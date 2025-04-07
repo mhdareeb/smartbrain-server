@@ -3,16 +3,23 @@ const {ClarifaiStub, grpc} = require("clarifai-nodejs-grpc");
 const stub = ClarifaiStub.grpc();
 
 const metadata = new grpc.Metadata();
-metadata.set("authorization", "Key " + process.env.CLARIFAI_API_KEY);
+metadata.set("authorization", "Key " + process.env.CLARIFAI_PAT);
 
-const Clarifai = require('clarifai');
+const USER_ID = 'clarifai';
+const APP_ID = 'main';
+const MODEL_ID = 'face-detection';
 
 const handleAPICall = (req, res) => {
 
     stub.PostModelOutputs(
         {
-            model_id: Clarifai.FACE_DETECT_MODEL,
-            inputs: [{data: {image: {url: req.body.url}}}],
+            user_app_id: {
+                "user_id": USER_ID,
+                "app_id": APP_ID
+            },
+            model_id: MODEL_ID,
+            model_version_id: process.env.CLARIFAI_MODEL_VERSION,
+            inputs: [{data: {image: {url: req.body.url, allow_duplicate_url: true}}}],
         },
         metadata,
         (err, response) => {
