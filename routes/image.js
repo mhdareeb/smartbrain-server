@@ -26,16 +26,10 @@ const handleAPICall = (req, res) => {
             if (err) {
                 console.log("Error: " + err);
                 return;
-            }
-    
+            }    
             if (response.status.code !== 10000) {
                 console.log("Received failed status: " + response.status.description + "\n" + response.status.details);
                 return;
-            }
-    
-            console.log("Predicted concepts, with confidence values:")
-            for (const c of response.outputs[0].data.concepts) {
-                console.log(c.name + ": " + c.value);
             }
             res.json(response);
         }
