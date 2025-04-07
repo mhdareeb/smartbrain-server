@@ -18,6 +18,11 @@ const db = require('knex')({
     }
 });
 
+console.log('Clarifai API Key:', process.env.CLARIFAI_API_KEY);
+console.log('Database URL:', process.env.DATABASE_URL);
+console.log('Server Port:', process.env.PORT);
+console.log('Environment:', process.env.NODE_ENV);
+
 const app = express();
 app.use(express.json())
 app.use(cors());
